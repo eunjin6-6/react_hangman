@@ -15,11 +15,11 @@ const LetterGrid = ({secretWord, guessedLetters, answerLength, complete})=>{
   //answer값이 변경되면 answerLength와 비교해서 정답여부 파악
   useEffect(()=>{
    
-    if(answer === answerLength){
+    if(answerLength > 0 && answer === answerLength){
       alert('정답입니다!');
       complete();
     }
-  },[answer]);
+  },[answer, answerLength, complete]);
 
   //guessedLetters의 값이 변경되면 answer를 업데이트
   useEffect(()=>{
@@ -29,7 +29,7 @@ const LetterGrid = ({secretWord, guessedLetters, answerLength, complete})=>{
 
     console.log('실행',newCount);
     setAnswer(newCount);
-  },[guessedLetters]);
+  },[guessedLetters, secretWord]);
 
   let letters = [...secretWord].map((letter,idx)=> {
     //let isShown = guessedLetters.indexOf(letter.toLowerCase()) > -1;
