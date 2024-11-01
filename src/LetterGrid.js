@@ -16,7 +16,7 @@ const LetterGrid = ({secretWord, guessedLetters, answerLength, complete})=>{
   useEffect(()=>{
    
     if(answer === answerLength){
-      alert('정답입니다! 🎉');
+      alert('정답입니다!');
       complete();
     }
   },[answer]);

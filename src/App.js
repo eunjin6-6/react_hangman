@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import GameBoard from './Gameboard';
 import SetWord from './SetWord';
@@ -11,14 +11,19 @@ import {
 function App() {
   const [maxError,setMaxError] = useState(0);
   const [answerLength,setAnswerLength] = useState(0)
-  const [secretWord,setSecretWord] = useState(()=>{
+  const [secretWord,setSecretWord] = useState('');
 
+  useEffect(()=>{
     let word = window.localStorage.getItem('secretWord');
-    word && word.length > 0 ? setAnswerLength(word.length):setAnswerLength(0);
-    word && word.length > 0 ? setMaxError(word.length + 2):setMaxError(1);
-
-    return word || ''
-  });
+    if(word && word.length > 0){
+      setSecretWord(word);
+      setAnswerLength(word.length);
+      setMaxError(word.length + 2);
+    }else{
+      setAnswerLength(0);
+      setMaxError(1);
+    }
+  },[]);
 
   // if(secretWord.length > 0){
   //   setMaxError(secretWord.length + 2);
