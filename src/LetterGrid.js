@@ -11,15 +11,17 @@ const LetterGrid = ({secretWord, guessedLetters, answerLength, complete})=>{
   */
   //let letters = secretWord.split('').map(letter=> <span>{letter}</span>);
   const [answer, setAnswer] = useState(0);
+  const [hasCompleted, setHasCompleted] = useState(false); // 완료 상태 추가
 
   //answer값이 변경되면 answerLength와 비교해서 정답여부 파악
   useEffect(()=>{
    
-    if(answerLength > 0 && answer === answerLength){
+    if(answerLength > 0 && answer === answerLength && !hasCompleted){
       alert('정답입니다!');
       complete();
+      setHasCompleted(true); // alert 한 번 표시 후 다시 표시되지 않도록 설정
     }
-  },[answer, answerLength, complete]);
+  },[answer, answerLength, complete, hasCompleted]);
 
   //guessedLetters의 값이 변경되면 answer를 업데이트
   useEffect(()=>{
